@@ -29,7 +29,7 @@ export const authIfTeacher = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
         req.user = decoded;
-        if (decoded.role == "teacher") {
+        if (decoded.role !== "teacher") {
             throw Error;
         }
         next();
@@ -48,7 +48,7 @@ export const authIfStudent = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
         req.user = decoded;
-        if (decoded.role == "student") {
+        if (decoded.role !== "student") {
             throw Error;
         }
         next();

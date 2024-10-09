@@ -5,6 +5,8 @@ import connectDb from "./config/db.js";
 import dotenv from "dotenv";
 import cp from "cookie-parser";
 import { authMiddleware } from "./middleware/authMiddleware.js";
+import swaggerUi from 'swagger-ui-express'
+import {swaggerSpec} from './swagger.js'
 
 dotenv.config();
 
@@ -16,6 +18,7 @@ connectDb();
 app.use(express.json());
 app.use(cp());
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/', userRouter)
 app.use('/users', authMiddleware, actionRoute)
 

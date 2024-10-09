@@ -31,6 +31,7 @@ export interface User{
 }
 
 export interface Grade {
+    id?: string;
     subject: string;
     grade: number;
   }
